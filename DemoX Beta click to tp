@@ -1,0 +1,20 @@
+local Tool = Instance.new("Tool")
+Tool.Name = "DemoX Beta Click to TP Tool"
+Tool.RequiresHandle = false
+Tool.Parent = game.Players.LocalPlayer.Backpack
+
+local floorHeight = 0 -- Define the height of the playable area floor
+local skyboxHeight = 200 -- Define the maximum height for the skybox
+
+Tool.Equipped:Connect(function(mouse)
+    mouse.Button1Down:Connect(function()
+        local targetPosition = mouse.Hit.Position
+        if targetPosition.Y >= floorHeight and targetPosition.Y <= skyboxHeight then -- Check if the target position is within the playable area
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(targetPosition)
+        end
+    end)
+end)
+
+Tool.Unequipped:Connect(function()
+    -- Cleanup code if needed
+end)
